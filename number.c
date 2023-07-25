@@ -1,4 +1,3 @@
-
 #include <stdarg.h>
 #include <stdio.h>
 #include <unistd.h>
@@ -54,9 +53,10 @@ char *convert(long int num, int base, int flags, params_t *params)
 */
 
 int print_unsigned(va_list ap, params_t *params)
-{
+
 	unsigned long l;
 
+{
 	if (params->l_modifier)
 		l = (unsigned long)va_arg(ap, unsigned long);
 	else if (params->h_modifier)
