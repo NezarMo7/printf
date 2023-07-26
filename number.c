@@ -1,20 +1,14 @@
-#include <stdarg.h>
-#include <stdio.h>
-#include <unistd.h>
-#include <limits.h>
-#include <stdlib.h>
 #include "main.h"
 
 /**
-* convert - function
-* @num: parametre
-* @base: parametre
-* @flags: parametre
-* @params: parametre
-*
-* Return: string
-*/
-
+ * convert - converter function, a clone of itoa
+ * @num: number
+ * @base: base
+ * @flags: argument flags
+ * @params: paramater struct
+ *
+ * Return: string
+ */
 char *convert(long int num, int base, int flags, params_t *params)
 {
 	static char *array;
@@ -34,7 +28,7 @@ char *convert(long int num, int base, int flags, params_t *params)
 	ptr = &buffer[49];
 	*ptr = '\0';
 
-	do {
+	do	{
 		*--ptr = array[n % base];
 		n /= base;
 	} while (n != 0);
@@ -45,13 +39,12 @@ char *convert(long int num, int base, int flags, params_t *params)
 }
 
 /**
-* print_unsigned - function
-* @ap: parametre
-* @params: parametre
-*
-* Return: bytes printed
-*/
-
+ * print_unsigned - prints unsigned integer numbers
+ * @ap: argument pointer
+ * @params: the parameters struct
+ *
+ * Return: bytes printed
+ */
 int print_unsigned(va_list ap, params_t *params)
 {
 	unsigned long l;
@@ -63,17 +56,18 @@ int print_unsigned(va_list ap, params_t *params)
 	else
 		l = (unsigned int)va_arg(ap, unsigned int);
 	params->unsign = 1;
-	return (print_number(convert(1, 10, CONVERT_UNSIGNED, params), params));
+	return (print_number(convert(l, 10, CONVERT_UNSIGNED, params), params));
 }
 
-/**
-* print_address - function
-* @ap: parametre
-* @params: parametre
-*
-* Return: bytes printed
-*/
 
+
+/**
+ * print_address - prints address
+ * @ap: argument pointer
+ * @params: the parameters struct
+ *
+ * Return: bytes printed
+ */
 int print_address(va_list ap, params_t *params)
 {
 	unsigned long int n = va_arg(ap, unsigned long int);
